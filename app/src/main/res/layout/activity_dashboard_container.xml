@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="16dp"
+    tools:context=".dashboard_container">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/setting" />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Logout"
+            />
+
+
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="115dp"
+            android:src="@drawable/noti" />
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/search2" />
+
+        <TextView
+            android:id="@+id/user_details"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="250dp"
+            android:text="Helow world"
+            />
+
+
+        </LinearLayout>
+
+    <!-- "How are you feeling today?" text -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="250dp"
+        android:text="How are you feeling today?"
+        android:textSize="18sp" />
+
+    <!-- Assess Yourself Button -->
+    <Button
+        android:id="@+id/buttonAssess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Assess Yourself"
+        android:layout_gravity="center_horizontal"
+         />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:src="@drawable/gamezone"
+/>
+    <!-- Navbar Options -->
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:layout_weight="1"
+        android:background="@drawable/nav_bar"
+        android:layout_marginTop="150dp"
+        android:layout_gravity="bottom">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_home"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/home"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="8dp"
+                />
+
+            <ImageButton
+                android:id="@+id/btn_chatbot"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/chatbot"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="8dp"
+                />
+
+            <ImageButton
+                android:id="@+id/btn_post"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/mind"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="8dp"
+                />
+
+            <ImageButton
+                android:id="@+id/btn_res"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="8dp"
+                android:src="@drawable/resources" />
+
+            <ImageButton
+                android:id="@+id/btn_profile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/profile"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="8dp"
+                />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</LinearLayout>
