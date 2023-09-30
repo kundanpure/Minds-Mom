@@ -18,6 +18,18 @@
             android:name=".ChatActivity"
             android:exported="false" />
         <activity
+            android:name=".OCDActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".BipolarAssessmentActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".AnxietyActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".GeneralAssessmentActivity"
+            android:exported="false"/>
+        <activity
             android:name=".MentalHealthAssessmentActivity"
             android:exported="false" />
         <activity

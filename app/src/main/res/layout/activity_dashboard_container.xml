@@ -49,23 +49,81 @@
 
         </LinearLayout>
 
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="300dp"
+        android:src="@drawable/lifematters"
+        />
+
+
     <!-- "How are you feeling today?" text -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="250dp"
+
         android:text="How are you feeling today?"
         android:textSize="18sp" />
 
     <!-- Assess Yourself Button -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+
     <Button
+        android:id="@+id/generalAssess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GENERAL TEST"
+        android:layout_gravity="center_horizontal"
+        />
+    <Button
+        android:layout_marginLeft="48dp"
         android:id="@+id/buttonAssess"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Assess Yourself"
+        android:text="DEPRESSION TEST"
         android:layout_gravity="center_horizontal"
          />
+
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ANXIETY TEST"
+        android:id="@+id/anxietyaccess"
+        />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BIPOLAR TEST"
+            android:layout_marginLeft="70dp"
+            android:id="@+id/biopolar_access"
+            />
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Ocd_btn"
+            android:text="OCD TEST"
+            android:layout_marginLeft="115dp"
+            />
+</LinearLayout>
+
+
+
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -80,7 +138,7 @@
         android:fillViewport="true"
         android:layout_weight="1"
         android:background="@drawable/nav_bar"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="bottom">
 
         <LinearLayout

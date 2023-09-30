@@ -90,7 +90,7 @@ class ChatActivity : AppCompatActivity() {
             jsonBody.toString().toRequestBody("application/json; charset=utf-8".toMediaType())
         val request = Request.Builder()
             .url("https://api.openai.com/v1/completions")
-            .header("Authorization", "Bearer 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")
+            .header("Authorization", "Bearer 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")
             .post(body)
             .build()
 

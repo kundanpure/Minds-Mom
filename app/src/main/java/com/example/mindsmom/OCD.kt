@@ -1,6 +1,5 @@
 package com.example.mindsmom
 import android.view.View
-
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -11,7 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-class MentalHealthAssessmentActivity : AppCompatActivity() {
+class OCDActivity : AppCompatActivity() {
 
     private var currentQuestionIndex = 0
     private var totalScore = 0
@@ -19,25 +18,53 @@ class MentalHealthAssessmentActivity : AppCompatActivity() {
     private lateinit var moodEmojiImageView: ImageView
     private lateinit var progressBar: ProgressBar
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mental_health_assessment)
+        setContentView(R.layout.activity_ocd)
         moodEmojiImageView = findViewById(R.id.mood_emoji_image_view)
         progressBar = findViewById(R.id.progress_bar)
-        questions = listOf(
-            // PHQ-9 Questions
-            Question("Over the past two weeks, how often have you found it hard to enjoy things that you usually love doing?", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
-            Question("Have you experienced periods of feeling down or hopeless recently?", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
-            Question("Have you had any trouble falling asleep, staying asleep, or sleeping too much?", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
-            Question("Do you feel tired or have little energy most days?", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
-            Question("Have you noticed changes in your appetite or eating habits lately?", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
-            Question("Have you been having negative thoughts about yourself or feeling like you've let yourself or your loved ones down?", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
-            Question("Have you had difficulty concentrating on tasks or activities, like reading or watching TV?", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
-            Question("Do you find yourself moving or speaking more slowly, or alternatively, feeling restless and fidgety?", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
-            Question("Have you had thoughts about hurting yourself or that life might be better if you were not here?", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
 
+        questions = listOf(
+            Question(
+                "How much time do you spend each day thinking about your obsessions or compulsions?",
+                listOf("Less than 1 hour", "1-3 hours", "3-8 hours", "More than 8 hours"),
+                listOf(0, 1, 2, 3)
+            ),
+            Question(
+                "How much do your obsessions or compulsions interfere with your daily activities, work, school, or social interactions?",
+                listOf("Not at all", "Mild interference", "Moderate interference", "Severe interference"),
+                listOf(0, 1, 2, 3)
+            ),
+            Question(
+                "How much distress do your obsessions or compulsions cause you?",
+                listOf("Not at all", "Mild distress", "Moderate distress", "Severe distress"),
+                listOf(0, 1, 2, 3)
+            ),
+            Question(
+                "Do you actively resist performing your compulsions?",
+                listOf("No", "Yes, but with some difficulty", "Yes, with a lot of difficulty", "Yes, unable to resist"),
+                listOf(0, 1, 2, 3)
+            ),
+            Question(
+                "Do you avoid situations that trigger your obsessions or compulsions?",
+                listOf("No", "Yes, but with some difficulty", "Yes, with a lot of difficulty", "Yes, unable to avoid"),
+                listOf(0, 1, 2, 3)
+            ),
+            Question(
+                "How much control do you have over your obsessions or compulsions?",
+                listOf("Complete control", "Moderate control", "Little control", "No control"),
+                listOf(0, 1, 2, 3)
+            ),
+            Question(
+                "How much time do you spend trying to resist your compulsions?",
+                listOf("None", "Less than 1 hour", "1-3 hours", "More than 3 hours"),
+                listOf(0, 1, 2, 3)
+            ),
+            Question(
+                "Overall, how much do your obsessions or compulsions bother you?",
+                listOf("Not at all", "A little", "Moderately", "A lot"),
+                listOf(0, 1, 2, 3)
+            )
         )
 
 
@@ -53,7 +80,7 @@ class MentalHealthAssessmentActivity : AppCompatActivity() {
 
         val answerChoicesRadioGroup = findViewById<RadioGroup>(R.id.answer_choices_radio_group)
         answerChoicesRadioGroup.removeAllViews()
-        answerChoicesRadioGroup.clearCheck() // Uncheck all radio buttons
+        answerChoicesRadioGroup.clearCheck()
 
         for (choice in currentQuestion.answerChoices) {
             val radioButton = RadioButton(this)
@@ -61,63 +88,44 @@ class MentalHealthAssessmentActivity : AppCompatActivity() {
             answerChoicesRadioGroup.addView(radioButton)
         }
 
-        val progress = ((index + 1) * 100) / questions.size
-
-        // Update ProgressBar
-        val progressBar = findViewById<ProgressBar>(R.id.progress_bar)
-
         val nextButton = findViewById<Button>(R.id.next_button)
         nextButton.setOnClickListener {
             handleUserResponse()
         }
     }
 
-    private fun interpretDepressionScore(score: Int) {
+    private fun interpretOCDScore(score: Int) {
         val moodEmojiImageView = findViewById<ImageView>(R.id.mood_emoji_image_view)
         val resultTextView = findViewById<TextView>(R.id.result_text_view)
 
         when {
-            score in 0..4 -> {
-                // Minimal depression symptoms
+            score <= 5 -> {
                 moodEmojiImageView.setImageResource(R.drawable.happy)
                 moodEmojiImageView.visibility = View.VISIBLE
-                resultTextView.text = "You have minimal depression symptoms."
+                resultTextView.text = "You have a low likelihood of OCD."
             }
-            score in 5..9 -> {
-                // Mild depression
+            score <= 10 -> {
                 moodEmojiImageView.setImageResource(R.drawable.natural)
                 moodEmojiImageView.visibility = View.VISIBLE
-                resultTextView.text = "You have mild depression."
+                resultTextView.text = "You have a moderate likelihood of OCD. Consult a professional for evaluation."
             }
-            score in 10..14 -> {
-                // Mild depression
-                moodEmojiImageView.setImageResource(R.drawable.natural)
-                moodEmojiImageView.visibility = View.VISIBLE
-                resultTextView.text = "You have moderate depression"
-            }
-            score in 15..19 -> {
-                // Mild depression
+            score <= 15 -> {
                 moodEmojiImageView.setImageResource(R.drawable.sad)
                 moodEmojiImageView.visibility = View.VISIBLE
-                resultTextView.text = "You have moderatly severe depression"
+                resultTextView.text = "You have a high likelihood of OCD. Please seek professional help."
             }
             else -> {
-                // Moderate or severe depression
                 moodEmojiImageView.setImageResource(R.drawable.sad)
                 moodEmojiImageView.visibility = View.VISIBLE
-                resultTextView.text = "You have severe depression."
+                resultTextView.text = "Invalid score. Please ensure the score is within the valid range."
             }
         }
     }
 
-
-
-
     private fun updateMoodEmoji() {
-        // Determine which emoji to display based on totalScore
         val emojiResource = when {
-            totalScore <= 4 -> R.drawable.happy // Use your own resource IDs
-            totalScore <= 9 -> R.drawable.natural
+            totalScore <= 5 -> R.drawable.happy
+            totalScore <= 10 -> R.drawable.natural
             else -> R.drawable.sad
         }
 
@@ -138,7 +146,7 @@ class MentalHealthAssessmentActivity : AppCompatActivity() {
                 loadQuestion(currentQuestionIndex)
             } else {
                 // Assessment is complete, calculate final score or show results
-                interpretDepressionScore(totalScore)
+                interpretOCDScore(totalScore)
 
                 updateMoodEmoji()
 
@@ -150,10 +158,4 @@ class MentalHealthAssessmentActivity : AppCompatActivity() {
             Toast.makeText(this, "Please select an answer.", Toast.LENGTH_SHORT).show()
         }
     }
-
-
-
-
-
-
 }

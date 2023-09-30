@@ -1,7 +1,7 @@
 package com.example.mindsmom
-import android.view.View
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -11,7 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-class MentalHealthAssessmentActivity : AppCompatActivity() {
+class AnxietyActivity : AppCompatActivity() {
 
     private var currentQuestionIndex = 0
     private var totalScore = 0
@@ -19,25 +19,19 @@ class MentalHealthAssessmentActivity : AppCompatActivity() {
     private lateinit var moodEmojiImageView: ImageView
     private lateinit var progressBar: ProgressBar
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mental_health_assessment)
+        setContentView(R.layout.activity_anxiety)
         moodEmojiImageView = findViewById(R.id.mood_emoji_image_view)
         progressBar = findViewById(R.id.progress_bar)
         questions = listOf(
-            // PHQ-9 Questions
-            Question("Over the past two weeks, how often have you found it hard to enjoy things that you usually love doing?", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
-            Question("Have you experienced periods of feeling down or hopeless recently?", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
-            Question("Have you had any trouble falling asleep, staying asleep, or sleeping too much?", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
-            Question("Do you feel tired or have little energy most days?", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
-            Question("Have you noticed changes in your appetite or eating habits lately?", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
-            Question("Have you been having negative thoughts about yourself or feeling like you've let yourself or your loved ones down?", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
-            Question("Have you had difficulty concentrating on tasks or activities, like reading or watching TV?", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
-            Question("Do you find yourself moving or speaking more slowly, or alternatively, feeling restless and fidgety?", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
-            Question("Have you had thoughts about hurting yourself or that life might be better if you were not here?", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
-
+            Question("Feeling nervous, anxious, or on edge", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
+            Question("Not being able to stop or control worrying", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
+            Question("Worrying too much about different things", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
+            Question("Trouble relaxing", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
+            Question("Being so restless that it is hard to sit still", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
+            Question("Becoming easily annoyed or irritable", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3)),
+            Question("Feeling afraid, as if something awful might happen", listOf("Not at all", "Several days", "More than half the days", "Nearly every day"), listOf(0, 1, 2, 3))
         )
 
 
@@ -72,57 +66,59 @@ class MentalHealthAssessmentActivity : AppCompatActivity() {
         }
     }
 
-    private fun interpretDepressionScore(score: Int) {
+    // Define your own interpretation of the score for anxiety assessment
+    private fun interpretAnxietyScore(score: Int) {
         val moodEmojiImageView = findViewById<ImageView>(R.id.mood_emoji_image_view)
         val resultTextView = findViewById<TextView>(R.id.result_text_view)
 
-        when {
-            score in 0..4 -> {
-                // Minimal depression symptoms
+        when (score) {
+            in 0..4 -> {
+                // Minimal anxiety symptoms
                 moodEmojiImageView.setImageResource(R.drawable.happy)
                 moodEmojiImageView.visibility = View.VISIBLE
-                resultTextView.text = "You have minimal depression symptoms."
+                resultTextView.text = "You have minimal anxiety symptoms."
             }
-            score in 5..9 -> {
-                // Mild depression
+            in 5..9 -> {
+                // Mild anxiety
                 moodEmojiImageView.setImageResource(R.drawable.natural)
                 moodEmojiImageView.visibility = View.VISIBLE
-                resultTextView.text = "You have mild depression."
+                resultTextView.text = "You have mild anxiety."
             }
-            score in 10..14 -> {
-                // Mild depression
+            in 10..14 -> {
+                // Moderate anxiety
                 moodEmojiImageView.setImageResource(R.drawable.natural)
                 moodEmojiImageView.visibility = View.VISIBLE
-                resultTextView.text = "You have moderate depression"
+                resultTextView.text = "You have moderate anxiety."
             }
-            score in 15..19 -> {
-                // Mild depression
+            in 15..19 -> {
+                // Moderately severe anxiety
                 moodEmojiImageView.setImageResource(R.drawable.sad)
                 moodEmojiImageView.visibility = View.VISIBLE
-                resultTextView.text = "You have moderatly severe depression"
+                resultTextView.text = "You have moderately severe anxiety."
             }
             else -> {
-                // Moderate or severe depression
+                // Severe anxiety
                 moodEmojiImageView.setImageResource(R.drawable.sad)
                 moodEmojiImageView.visibility = View.VISIBLE
-                resultTextView.text = "You have severe depression."
+                resultTextView.text = "You have severe anxiety."
             }
         }
     }
 
 
-
-
     private fun updateMoodEmoji() {
-        // Determine which emoji to display based on totalScore
-        val emojiResource = when {
-            totalScore <= 4 -> R.drawable.happy // Use your own resource IDs
-            totalScore <= 9 -> R.drawable.natural
+        val moodEmojiImageView = findViewById<ImageView>(R.id.mood_emoji_image_view)
+
+        val emojiResource = when (totalScore) {
+            in 0..4 -> R.drawable.happy // Use your own resource IDs
+            in 5..9 -> R.drawable.natural
             else -> R.drawable.sad
         }
 
         moodEmojiImageView.setImageResource(emojiResource)
+        moodEmojiImageView.visibility = View.VISIBLE
     }
+
 
     private fun handleUserResponse() {
         val answerChoicesRadioGroup = findViewById<RadioGroup>(R.id.answer_choices_radio_group)
@@ -138,7 +134,7 @@ class MentalHealthAssessmentActivity : AppCompatActivity() {
                 loadQuestion(currentQuestionIndex)
             } else {
                 // Assessment is complete, calculate final score or show results
-                interpretDepressionScore(totalScore)
+                interpretAnxietyScore(totalScore)
 
                 updateMoodEmoji()
 
@@ -150,10 +146,4 @@ class MentalHealthAssessmentActivity : AppCompatActivity() {
             Toast.makeText(this, "Please select an answer.", Toast.LENGTH_SHORT).show()
         }
     }
-
-
-
-
-
-
 }
